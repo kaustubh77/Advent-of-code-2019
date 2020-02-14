@@ -12,7 +12,7 @@ int intcode(vector<int> a){
             return a[0];
         int n1_index = a[index+1];
         int n2_index = a[index+2];
-        int ans_index = a[index+3]
+        int ans_index = a[index+3];
 
         if(opcode == 1)
             a[ans_index] = a[n1_index] + a[n2_index];
@@ -30,9 +30,10 @@ int main()
     filename = "input.txt";
 
     file.open(filename.c_str());
-    vector<int> input;
+
+    vector<int> a;
     while((file>>word)!=NULL)
-        input.push_back(stoi(word));
+        a.push_back(stoi(word));
 
     a[1] = 12;
     a[2] = 2;

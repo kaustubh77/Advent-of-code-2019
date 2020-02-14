@@ -5,19 +5,19 @@ arr = [int(x) for x in str_input]
 
 
 # PART 1
-def intcode(program, index=0):
-    opcode = program[index]
+def intcode(a, index=0):
+    opcode = a[index]
     if opcode == 99:
-        return program[0]
-    num1_index = program[index + 1]
-    num2_index = program[index + 2]
-    answer_index = program[index + 3]
+        return a[0]
+    num1_index = a[index + 1]
+    num2_index = a[index + 2]
+    answer_index = a[index + 3]
     if opcode == 1:
-        program[answer_index] = program[num1_index] + program[num2_index]
+        a[answer_index] = a[num1_index] + a[num2_index]
     elif opcode == 2:
-        program[answer_index] = program[num1_index] * program[num2_index]
+        a[answer_index] = a[num1_index] * a[num2_index]
     index += 4
-    return intcode(program, index)
+    return intcode(a, index)
 
 
 arr[1] = 12

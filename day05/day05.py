@@ -11,67 +11,67 @@ def get_mode(first):
     return opcode, modes[::-1]
 
 
-def get_value(program, index, immediate):
+def get_value(a, index, immediate):
     if immediate:
-        return program[index]
+        return a[index]
     else:
-        return program[program[index]]
+        return a[a[index]]
 
 
-def process_program(program, inputValue):
+def process_program(a, inputValue):
     index = 0
     opcode = 0
-    while program[index] != 99:
-        opcode, modes = get_mode(program[index])
+    while a[index] != 99:
+        opcode, modes = get_mode(a[index])
 
         if opcode == 99:
-            print(program[0])
+            print(a[0])
             break
         elif opcode == 1:
-            v1 = get_value(program, index + 1, modes[0])
-            v2 = get_value(program, index + 2, modes[1])
-            destination = program[index + 3]
-            program[destination] = v1 + v2
+            v1 = get_value(a, index + 1, modes[0])
+            v2 = get_value(a, index + 2, modes[1])
+            destination = a[index + 3]
+            a[destination] = v1 + v2
             index += 4
         elif opcode == 2:
-            v1 = get_value(program, index + 1, modes[0])
-            v2 = get_value(program, index + 2, modes[1])
-            destination = program[index + 3]
-            program[destination] = v1 * v2
+            v1 = get_value(a, index + 1, modes[0])
+            v2 = get_value(a, index + 2, modes[1])
+            destination = a[index + 3]
+            a[destination] = v1 * v2
             index += 4
         elif opcode == 3:
-            destination = program[index + 1]
-            program[destination] = inputValue
+            destination = a[index + 1]
+            a[destination] = inputValue
             index += 2
         elif opcode == 4:
-            v1 = get_value(program, index + 1, modes[0])
+            v1 = get_value(a, index + 1, modes[0])
             print(v1)
             index += 2
         elif opcode == 5:
-            v1 = get_value(program, index + 1, modes[0])
-            v2 = get_value(program, index + 2, modes[1])
+            v1 = get_value(a, index + 1, modes[0])
+            v2 = get_value(a, index + 2, modes[1])
             if v1 != 0:
                 index = v2
             else:
                 index += 3
         elif opcode == 6:
-            v1 = get_value(program, index + 1, modes[0])
-            v2 = get_value(program, index + 2, modes[1])
+            v1 = get_value(a, index + 1, modes[0])
+            v2 = get_value(a, index + 2, modes[1])
             if v1 == 0:
                 index = v2
             else:
                 index += 3
         elif opcode == 7:
-            v1 = get_value(program, index + 1, modes[0])
-            v2 = get_value(program, index + 2, modes[1])
-            destination = program[index + 3]
-            program[destination] = int(v1 < v2)
+            v1 = get_value(a, index + 1, modes[0])
+            v2 = get_value(a, index + 2, modes[1])
+            destination = a[index + 3]
+            a[destination] = int(v1 < v2)
             index += 4
         elif opcode == 8:
-            v1 = get_value(program, index + 1, modes[0])
-            v2 = get_value(program, index + 2, modes[1])
-            destination = program[index + 3]
-            program[destination] = int(v1 == v2)
+            v1 = get_value(a, index + 1, modes[0])
+            v2 = get_value(a, index + 2, modes[1])
+            destination = a[index + 3]
+            a[destination] = int(v1 == v2)
             index += 4
 
 
@@ -80,3 +80,4 @@ process_program(arr.copy(), 1)
 
 # PART 2
 process_program(arr.copy(), 5)
+
